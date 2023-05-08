@@ -3,9 +3,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.utilities import WikipediaAPIWrapper
 import pdfminer.high_level
 import os 
-from apikey import apikey 
-from apikey import PCapikey
-from apikey import SPapikey
+#from apikey import apikey 
+#from apikey import PCapikey
+#from apikey import SPapikey
 import streamlit as st 
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
@@ -32,7 +32,7 @@ os.environ['OPENAI_API_KEY'] = st.secrets[apikey]
 
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
-llm = OpenAI(temperature=0, openai_api_key=apikey)
+llm = OpenAI(temperature=0, openai_api_key=st.secrets[apikey])
 chain = load_qa_chain(llm, chain_type="stuff")
 
 
