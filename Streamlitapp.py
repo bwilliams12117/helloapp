@@ -17,7 +17,7 @@ from langchain.utilities import GoogleSerperAPIWrapper
 import openai
 import pandas as pd
 
-openai.api_key = apikey
+openai.api_key = st.secrets[apikey]
 
 # Prompt the API with your desired text
 #prompt_text = "give me a table with all the teams in the nba with their division?"
@@ -28,7 +28,7 @@ openai.api_key = apikey
 
 # App framework
 
-os.environ['OPENAI_API_KEY'] = apikey
+os.environ['OPENAI_API_KEY'] = st.secrets[apikey]
 
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
@@ -60,7 +60,7 @@ title_chain = LLMChain(llm=llm, prompt=title_template, verbose=True, output_key=
 if prompt: 
 
     response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=4000)
-    os.environ["SERPER_API_KEY"] = SPapikey
+    os.environ["SERPER_API_KEY"] = st.secrets[SPapikey]
     agent = GoogleSerperAPIWrapper()
    
     #print(search.run("What's a roth ira"))
@@ -87,8 +87,8 @@ if prompt:
     from langchain.embeddings.openai import OpenAIEmbeddings
     import pinecone
 
-    OPENAI_API_KEY = apikey
-    PINECONE_API_KEY = PCapikey
+    OPENAI_API_KEY = st.secrets[apikey]
+    PINECONE_API_KEY = st.secrets[PCapikey]
     PINECONE_API_ENV = 'us-east-1-aws'
 
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)    
